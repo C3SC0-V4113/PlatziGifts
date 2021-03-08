@@ -7779,3 +7779,51 @@ function is_php_version_compatible( $required ) {
 function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
 	return abs( (float) $expected - (float) $actual ) <= $precision;
 }
+
+/**
+ * Codigo Extra
+ * Gracias a Platzi
+ */
+
+function add_administrador_tema_role() { //nombre de nuestra función, puede ser el nombre que quieras
+    add_role(
+        'administrador_tema', //Nombre de role.
+        'Administrador Tema', //Nombre que se visualará en la creación o página de opciones de usuarios.
+       array(    
+            'read' => true, //Permite el acceso al dashboard del adminitrador.
+            'switch_themes' => true, //Permite el cambio de temas.
+            'edit_themes'   => true, //Permite editar archivos desde el administrado de archivos del tema.
+            'edit_theme_options' => true, //Permite modificar Widgets,Menús, Personalizar.
+            'install_themes'    => true,  //Permite instalar temas nuevos.
+            'update_themes' => true, //Permite actualizar temas instalados.
+            'delete_themes' => true, //Permite eliminar temas.
+
+            )   //Array con las capabilities
+    );
+}
+
+//add_action(Hook, Nombre de la función)
+add_action('init', 'add_administrador_tema_role'); 
+
+function remove_role_administrado_temas() { //Nombre de la función
+    remove_role( 'administrador_tema' ); 
+}
+ 
+//add_action(Hook, Nombre de la función)
+add_action( 'init', 'remove_role_administrado_temas' );
+
+function add_cap_subscriber(){ //Nombre de la función
+    $role = get_role( 'subscriber' ); //Instaciamos el role en la variable $role
+    $role->add_cap( 'edit_posts'); //Agregamos la cabability usando el método add_cap().
+}
+
+//add_action(Hook, Nombre de la función)
+add_action( 'init', 'add_cap_subscriber');
+
+function remove_cap_editor(){ //Nombre de la función
+    $role = get_role( 'editor' ); //Instaciamos el role en la variable $role
+    $role->remove_cap('edit_pages'); //Removemos la cabability usando el método remove_cap().
+}
+
+//add_action(Hook, Nombre de la función)
+add_action( 'init', 'remove_cap_editor');

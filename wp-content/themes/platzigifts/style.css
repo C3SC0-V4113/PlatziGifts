@@ -1,0 +1,16 @@
+/*
+Theme name: PlatziGifts
+Version: 1.0
+Description: Sitio para catalogo de Platzi
+Author: Francisco Valle
+Author URL: https://github.com/C3SC0-V4113
+License: GNU General Public License v2 or later
+License URL: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+body{
+    background-color: #eeee;
+}
+header{
+    background-color: black;
+}
